@@ -1,0 +1,42 @@
+name: CI/CD Pipeline
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+
+            - name: Install dependencies
+              run: |
+                  cd frontend
+                  npm install
+
+    synthetic_tests:
+        needs: build
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Run Datadog Synthetic Tests
+              uses: ./synthetics-ci-github-action-main
+              with:
+                  api_key: ${{ secrets.DD_API_KEY }}
+                  app_key: ${{ secrets.DD_APP_KEY }}
+                  DATADOG_SITE: us5.datadoghq.com
+                  public_ids: |
+                      xmk-yx8-wb6
+                      qna-nyq-afp
