@@ -12,6 +12,9 @@ const run = async (): Promise<void> => {
   try {
     const {results, summary} = await synthetics.executeTests(reporter, config)
     const orgSettings = await synthetics.utils.getOrgSettings(reporter, config)
+    console.log(results);
+    console.log('this the summary',summary);
+    
 
     synthetics.utils.renderResults({
       config,
