@@ -4,9 +4,9 @@ import {synthetics} from '@datadog/datadog-ci'
 
 const run = async (): Promise<void> => {
   synthetics.utils.setCiTriggerApp('github_action')
-  console.log(
-    'this is   synthetics.utils.setCiTriggerApp(github_action)',
-    synthetics.utils.setCiTriggerApp('github_action')
+  core.info(
+    `this is   synthetics.utils.setCiTriggerApp(github_action)',
+${synthetics.utils.setCiTriggerApp('github_action')}`
   )
 
   const reporter = getReporter()
@@ -16,7 +16,7 @@ const run = async (): Promise<void> => {
   try {
     const {results, summary} = await synthetics.executeTests(reporter, config)
     const orgSettings = await synthetics.utils.getOrgSettings(reporter, config)
-    console.log('main.ts results, summary ', results, summary)
+    core.info(`'main.ts results, summary ', ${summary} ${summary}`)
 
     synthetics.utils.renderResults({
       config,
