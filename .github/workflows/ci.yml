@@ -38,5 +38,4 @@ jobs:
                   app_key: ${{ secrets.DD_APP_KEY }}
                   DATADOG_SITE: us5.datadoghq.com
                   public_ids: |
-                      xmk-yx8-wb6
-                      qna-nyq-afp
+                      enb-6iv-w2w
